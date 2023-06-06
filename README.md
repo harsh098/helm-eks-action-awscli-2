@@ -68,7 +68,7 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
 
       - name: helm deploy
-        uses: harsh098/helm-eks-action-awscli-v2@master
+        uses: harsh098/helm-eks-action-awscli-2@v0.1
         env:
           KUBE_CONFIG_DATA: ${{ env.KUBE_CONFIG_DATA }}
         with:
@@ -84,7 +84,7 @@ Use the output of your command in later steps
     steps:
       - name: Get URL
         id: url
-        uses: harsh098/helm-eks-action-awscli-v2@master
+        uses: harsh098/helm-eks-action-awscli-2@v0.1
         with:
           command: kubectl get svc my_svc -o json | jq -r '.status.loadBalancer.ingress[0].hostname'
 
