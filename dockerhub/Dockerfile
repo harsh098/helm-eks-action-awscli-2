@@ -1,6 +1,7 @@
 FROM python:3.7-alpine3.9
 
 LABEL maintainer="Tapan Halani"
+LABEL maintaners="Harsh Mishra"
 
 ENV PYTHONIOENCODING=UTF-8
 
@@ -11,7 +12,7 @@ RUN apk add --update --no-cache curl ca-certificates \
     && apk add glibc-2.28-r0.apk \
     && curl -sL -o glibc-bin-2.28-r0.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-bin-2.28-r0.apk \
     && apk add glibc-bin-2.28-r0.apk \
-    && curl -sL -o awscliv2.zip https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip \
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install \
     && rm -Rf aws/ awscliv2.zip glibc-2.28-r0.apk glibc-bin-2.28-r0.apk \
