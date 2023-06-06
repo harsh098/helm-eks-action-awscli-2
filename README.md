@@ -1,5 +1,15 @@
-# helm-eks-action
-Github Action for executing Helm commands on EKS (using aws-iam-authenticator).
+# helm-eks-action-awscli-2
+
+This GitHub Action is based on [koslib/helm-eks-action](https://github.com/koslib/helm-eks-action) with the improvement that it runs on aws-cli-v2 as opposed to aws-cli-v1.  
+
+The functionality and the usage is same.  
+
+I did not have enough time to make a **PR** and get it merged so I forked the original action. 
+
+The action is almost fully compatible with the original plugin. 
+
+# helm-eks-action-awscli-2
+Github Action for executing Helm commands on EKS .
 
 The Helm version installed is Helm3.
 
@@ -58,7 +68,7 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
 
       - name: helm deploy
-        uses: koslib/helm-eks-action@master
+        uses: harsh098/helm-eks-action-awscli-v2@master
         env:
           KUBE_CONFIG_DATA: ${{ env.KUBE_CONFIG_DATA }}
         with:
@@ -74,7 +84,7 @@ Use the output of your command in later steps
     steps:
       - name: Get URL
         id: url
-        uses: koslib/helm-eks-action@master
+        uses: harsh098/helm-eks-action-awscli-v2@master
         with:
           command: kubectl get svc my_svc -o json | jq -r '.status.loadBalancer.ingress[0].hostname'
 
@@ -89,9 +99,8 @@ The latest version of this action uses the following dependencies versions:
 
 | Package      | Version |
 | ----------- | ----------- |
-| awscli      | 1.24.0  |
-| helm   | 3.10.1        |
-| kubectl   | 1.25.4        |
+| awscli      | 2.0.30  |
+| helm   | v3.3.0     |
 
 It is very much possible that an update came out and I did not update the action on time. In this please, feel free to [send me a PR](#contributing) and I'll review it as soon as possible.
 
@@ -115,6 +124,10 @@ If you find this configuration option complicated, you can still supply `KUBE_CO
 
 Pull requests, issues or feedback of any kind are more than welcome by anyone!
 
-If this action has helped you in any way and enjoyed it, feel free to submit feedback through [issues](https://github.com/koslib/helm-eks-action/issues) or buy me a coffee!
+If this action has helped you in any way and enjoyed it, feel free to submit feedback through [issues](https://github.com/harsh098/helm-eks-action-awscli-2/issues) or buy me a coffee!  
+
+# Buy Konstantinos Livieratos a Coffee  
+
+The original author [Konstantinos Livieratos](https://github.com/koslib/) deserves the rightful credit.  
 
 <a href="https://www.buymeacoffee.com/koslib" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
