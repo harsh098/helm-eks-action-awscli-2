@@ -2,27 +2,26 @@
 
 set -e
 
-echo "${KUBE_CONFIG_DATA}" | base64 -d > kubeconfig
-export KUBECONFIG="${PWD}/kubeconfig"
-chmod 600 "${PWD}/kubeconfig"
+echo "$KUBE_CONFIG_DATA" | base64 -d > kubeconfig
+export KUBECONFIG="$PWD/kubeconfig"
+chmod 600 "$PWD/kubeconfig"
 
-if [[ -n "${INPUT_PLUGINS// /}" ]]
-then
-    plugins="$(echo "${INPUT_PLUGINS}" | tr ",")"
+if [ -n "$(echo "$INPUT_PLUGINS" | tr -d '[:space:]')" ]; then
+    plugins="$(echo "$INPUT_PLUGINS" | tr ', ' '\n')"
 
-    for plugin in ${plugins}
-    do
-        echo "installing helm plugin: [${plugin}]"
-        helm plugin install "${plugin}"
+    for plugin in $plugins; do
+        echo "installing helm plugin: [$plugin]"
+        helm plugin install "$plugin"
     done
 fi
 
 echo "running entrypoint command(s)"
 
-response=$(sh -c "${INPUT_COMMAND}")
+response=$(sh -c "$INPUT_COMMAND")
 
 {
-  echo "response<<EOF";
-  echo "$response";
-  echo "EOF";
-} >> "${GITHUB_OUTPUT}"
+  echo "response<<EOF"
+  echo "$response"
+  echo "EOF"
+} >> "$GITHUB_OUTPUT"
+
