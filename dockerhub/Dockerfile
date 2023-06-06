@@ -16,7 +16,10 @@ RUN apk add --update --no-cache curl ca-certificates \
     && unzip awscliv2.zip \
     && ./aws/install \
     && rm -Rf aws/ awscliv2.zip glibc-2.28-r0.apk glibc-bin-2.28-r0.apk \
-    && aws --version
+    && aws --version \
+    && curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl \
+    && chmod +x ./kubectl \
+    && mv ./kubectl /usr/local/bin/kubectl
 
 ENV HELM_VERSION="v3.3.0"
 

@@ -7,6 +7,8 @@ cat kubeconfig
 export KUBECONFIG="$PWD/kubeconfig"
 chmod 600 "$PWD/kubeconfig"
 
+kubectl get nodes -o wide
+
 if [ -n "$(echo "$INPUT_PLUGINS" | tr -d '[:space:]')" ]; then
     plugins="$(echo "$INPUT_PLUGINS" | tr ', ' '\n')"
 
