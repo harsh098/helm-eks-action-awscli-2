@@ -21,10 +21,9 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
-          load: true
           context: "{{defaultContext}}:dockerhub"
           platforms: linux/amd64
           tags: hmx098/actions/ga-helm-eks:latest, hmx098/actions/ga-helm-eks:${{ github.event.inputs.tag }}
