@@ -1,23 +1,25 @@
-FROM mozilla/sops:v3.6.0-alpine as sops
+FROM python:3.7-alpine3.9
 
-FROM alpine:3.13
+LABEL maintainer="Tapan Halani"
 
-ARG AWSCLI_VERSION="1.24.0"
-ARG HELM_VERSION="3.10.1"
-ARG KUBECTL_VERSION="1.25.4"
+ENV PYTHONIOENCODING=UTF-8
 
-COPY --from=sops /usr/local/bin/sops /usr/bin/sops
+### Install curl, aws-cli, kubectl
+RUN apk add --no-cache curl unzip \
+    && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip" -o "awscliv2.zip" \
+    && unzip awscliv2.zip \
+    && ./aws/install \
+    && curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl \
+    && chmod +x ./kubectl \
+    && mv ./kubectl /usr/local/bin/kubectl
 
-RUN apk add py-pip curl wget ca-certificates git bash jq gcc alpine-sdk
-RUN pip install "awscli==${AWSCLI_VERSION}"
-RUN curl -L -o /usr/bin/kubectl https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl
-RUN chmod +x /usr/bin/kubectl
+ENV HELM_VERSION="v3.3.0"
 
-RUN curl -o /usr/bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/aws-iam-authenticator
-RUN chmod +x /usr/bin/aws-iam-authenticator
+### Install helm v3.3.0
+RUN wget -q https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm \
+    && chmod +x /usr/local/bin/helm
 
-RUN wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm
-RUN chmod +x /usr/local/bin/helm
+ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
