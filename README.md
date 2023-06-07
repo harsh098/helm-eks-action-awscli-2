@@ -99,7 +99,7 @@ The latest version of this action uses the following dependencies versions:
 
 | Package      | Version |
 | ----------- | ----------- |
-| awscli      | 2.0.30  |
+| awscli      | 2.11.25  |
 | helm   | v3.3.0     |
 
 It is very much possible that an update came out and I did not update the action on time. In this please, feel free to [send me a PR](#contributing) and I'll review it as soon as possible.
