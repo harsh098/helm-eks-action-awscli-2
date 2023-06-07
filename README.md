@@ -68,7 +68,7 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
 
       - name: helm deploy
-        uses: harsh098/helm-eks-action-awscli-2@v0.1
+        uses: harsh098/helm-eks-action-awscli-2@v0.3
         env:
           KUBE_CONFIG_DATA: ${{ env.KUBE_CONFIG_DATA }}
         with:
@@ -84,7 +84,7 @@ Use the output of your command in later steps
     steps:
       - name: Get URL
         id: url
-        uses: harsh098/helm-eks-action-awscli-2@v0.1
+        uses: harsh098/helm-eks-action-awscli-2@v0.3
         with:
           command: kubectl get svc my_svc -o json | jq -r '.status.loadBalancer.ingress[0].hostname'
 
@@ -99,7 +99,7 @@ The latest version of this action uses the following dependencies versions:
 
 | Package      | Version |
 | ----------- | ----------- |
-| awscli      | 2.11.25  |
+| awscli      | v2.11.25  |
 | helm   | v3.3.0     |
 
 It is very much possible that an update came out and I did not update the action on time. In this please, feel free to [send me a PR](#contributing) and I'll review it as soon as possible.
