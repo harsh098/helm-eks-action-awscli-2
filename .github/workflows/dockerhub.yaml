@@ -24,6 +24,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          context: "{{defaultContext}}:dockerhub"
+          context: "{{defaultContext}}"
           platforms: linux/amd64
           tags: hmx098/actions:latest, hmx098/actions:${{ github.event.inputs.tag }}
