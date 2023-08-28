@@ -124,10 +124,4 @@ If you find this configuration option complicated, you can still supply `KUBE_CO
 
 Pull requests, issues or feedback of any kind are more than welcome by anyone!
 
-If this action has helped you in any way and enjoyed it, feel free to submit feedback through [issues](https://github.com/harsh098/helm-eks-action-awscli-2/issues) or buy me a coffee!  
-
-# Buy Konstantinos Livieratos a Coffee  
-
-The original author [Konstantinos Livieratos](https://github.com/koslib/) deserves the rightful credit.  
-
-<a href="https://www.buymeacoffee.com/koslib" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+If this action has helped you in any way and enjoyed it, feel free to submit feedback through [issues](https://github.com/harsh098/helm-eks-action-awscli-2/issues)
